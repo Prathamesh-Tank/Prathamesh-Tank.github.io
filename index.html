@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prathamesh Nitin Tanksale | PhD Scholar – IIT Ropar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #050a14;
+      --bg2:      #0a1628;
+      --accent:   #4f8ef7;
+      --accent2:  #a259ff;
+      --accent3:  #00e5c3;
+      --glass:    rgba(255,255,255,0.05);
+      --glass2:   rgba(255,255,255,0.09);
+      --border:   rgba(255,255,255,0.10);
+      --text:     #e8edf5;
+      --muted:    #8899bb;
+      --radius:   18px;
+      --shadow:   0 8px 40px rgba(0,0,0,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+
+    /* ── Canvas Particles ── */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Floating blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.18;
+      z-index: 0;
+      animation: blobFloat 14s ease-in-out infinite alternate;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -150px; left: -150px; animation-duration: 18s; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -100px; right: -100px; animation-duration: 22s; animation-delay: -8s; }
+    .blob-3 { width: 400px; height: 400px; background: var(--accent3); top: 40%; left: 40%; animation-duration: 16s; animation-delay: -4s; }
+
+    @keyframes blobFloat {
+      0%   { transform: translate(0,0) scale(1); }
+      33%  { transform: translate(40px,-30px) scale(1.05); }
+      66%  { transform: translate(-30px,50px) scale(0.95); }
+      100% { transform: translate(20px,20px) scale(1.02); }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(5,10,20,0.65);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: padding .3s;
+    }
+    nav.scrolled { padding: 12px 5%; }
+
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Sections wrapper ── */
+    main { position: relative; z-index: 1; }
+    section { padding: 100px 5%; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 90px;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      color: var(--accent3);
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeSlideUp .7s ease both;
+    }
+    .hero-tag .dot {
+      width: 7px; height: 7px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(1.5); }
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      animation: fadeSlideUp .8s .1s ease both;
+    }
+    .hero-name .grad {
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent2) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      margin-top: 16px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      font-weight: 400;
+      animation: fadeSlideUp .8s .2s ease both;
+    }
+    .hero-role span { color: var(--accent); font-weight: 600; }
+
+    .hero-quote {
+      margin-top: 28px;
+      max-width: 540px;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+      border-left: 3px solid var(--accent2);
+      padding-left: 18px;
+      animation: fadeSlideUp .8s .3s ease both;
+    }
+
+    .hero-ctas {
+      margin-top: 44px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeSlideUp .8s .4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform .25s, box-shadow .25s, opacity .25s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      box-shadow: 0 6px 30px rgba(79,142,247,0.4);
+    }
+    .btn-primary:hover { box-shadow: 0 10px 40px rgba(79,142,247,0.6); }
+    .btn-ghost {
+      background: var(--glass);
+      color: var(--text);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .btn-ghost:hover { background: var(--glass2); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: fadeIn 1.5s 1s both;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { transform: scaleY(1); opacity: 1; }
+      50%      { transform: scaleY(0.4); opacity: 0.3; }
+    }
+
+    /* ── Section Headers ── */
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .section-title .highlight {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      border-radius: 99px;
+      margin: 18px 0 48px;
+    }
+
+    /* ── Glass Card ── */
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px);
+      padding: 32px;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(79,142,247,0.07) 0%, rgba(162,89,255,0.07) 100%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .glass-card:hover { transform: translateY(-6px); border-color: rgba(79,142,247,0.35); box-shadow: var(--shadow); }
+    .glass-card:hover::before { opacity: 1; }
+
+    /* ── About ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 1rem; }
+    .about-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .info-item .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .info-item .value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      transition: transform .3s, border-color .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: rgba(79,142,247,0.35); }
+    .stat-card:hover::after { transform: scaleX(1); }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-desc { font-size: 0.82rem; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+    /* ── Research Interests ── */
+    #research .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .research-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .research-card.security::before { background: linear-gradient(to right, #f74f4f, #ff9a4f); }
+    .research-card.performance::before { background: linear-gradient(to right, var(--accent), var(--accent3)); }
+    .research-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+
+    .research-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+    }
+    .research-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .research-card.security .research-title { color: #ff7a7a; }
+    .research-card.performance .research-title { color: var(--accent); }
+    .research-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .rtag {
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .security .rtag { border-color: rgba(247,79,79,0.35); color: #ff9a9a; background: rgba(247,79,79,0.08); }
+    .performance .rtag { border-color: rgba(79,142,247,0.35); color: #a0c4ff; background: rgba(79,142,247,0.08); }
+
+    /* ── Publications ── */
+    #publications .pub-list { display: flex; flex-direction: column; gap: 24px; }
+
+    .pub-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pub-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform .35s;
+    }
+    .pub-card:hover { transform: translateX(6px); border-color: rgba(79,142,247,0.35); box-shadow: var(--shadow); }
+    .pub-card:hover::before { transform: scaleY(1); }
+
+    .pub-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(79,142,247,0.12);
+      border: 1px solid rgba(79,142,247,0.25);
+      padding: 4px 12px;
+      border-radius: 99px;
+      white-space: nowrap;
+      height: fit-content;
+    }
+    .pub-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .pub-authors {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .pub-authors strong { color: var(--accent3); }
+    .pub-venue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(162,89,255,0.12);
+      border: 1px solid rgba(162,89,255,0.25);
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #c49aff;
+    }
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .pub-link:hover { color: var(--accent3); }
+
+    /* ── Skills ── */
+    #skills .skills-outer { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .skill-group-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: 24px;
+    }
+    .skill-item { margin-bottom: 22px; }
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .skill-name { font-size: 0.9rem; font-weight: 600; }
+    .skill-pct { font-size: 0.78rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .skill-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+    .skill-fill.animate { transform: scaleX(1); }
+    .skill-fill.green { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+
+    .tool-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chip {
+      padding: 7px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--glass2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: transform .25s, border-color .25s, color .25s;
+      cursor: default;
+    }
+    .chip:hover { transform: translateY(-3px); border-color: rgba(79,142,247,0.5); color: var(--accent); }
+
+    /* ── Education Timeline ── */
+    #education .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    #education .timeline::before {
+      content: '';
+      position: absolute;
+      left: 16px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 52px;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -31px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(79,142,247,0.3);
+      animation: dotPulse 2.5s ease-in-out infinite;
+    }
+    .timeline-item:nth-child(2) .timeline-dot { background: var(--accent2); box-shadow: 0 0 0 3px rgba(162,89,255,0.3); }
+
+    @keyframes dotPulse {
+      0%,100% { box-shadow: 0 0 0 3px rgba(79,142,247,0.3); }
+      50%      { box-shadow: 0 0 0 8px rgba(79,142,247,0); }
+    }
+
+    .edu-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      transition: transform .3s, border-color .3s;
+    }
+    .edu-card:hover { transform: translateX(8px); border-color: rgba(79,142,247,0.35); }
+    .edu-degree { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    .edu-inst {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 4px 0;
+    }
+    .edu-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .edu-badge {
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .badge-year { background: rgba(0,229,195,0.12); color: var(--accent3); border: 1px solid rgba(0,229,195,0.25); }
+    .badge-cgpa { background: rgba(79,142,247,0.12); color: var(--accent); border: 1px solid rgba(79,142,247,0.25); }
+
+    .edu-details { margin-top: 16px; }
+    .edu-details p { font-size: 0.88rem; color: var(--muted); margin-bottom: 6px; }
+    .edu-details p strong { color: var(--text); font-weight: 600; }
+
+    /* ── Teaching ── */
+    #teaching .teach-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .teach-chip {
+      padding: 12px 22px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: transform .25s, border-color .25s, color .25s, background .25s;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .teach-chip .tc-icon { font-size: 1rem; }
+    .teach-chip:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79,142,247,0.45);
+      color: var(--accent);
+      background: rgba(79,142,247,0.08);
+    }
+
+    /* ── Contact ── */
+    #contact .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .contact-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      transition: transform .3s, border-color .3s;
+    }
+    .contact-card:hover { transform: translateY(-4px); border-color: rgba(79,142,247,0.35); }
+    .contact-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .ci-email  { background: rgba(79,142,247,0.15); }
+    .ci-phone  { background: rgba(0,229,195,0.15); }
+    .ci-loc    { background: rgba(162,89,255,0.15); }
+    .ci-lang   { background: rgba(255,154,79,0.15); }
+    .contact-info .ci-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .contact-info .ci-value { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-top: 4px; }
+
+    /* ── Hobbies ── */
+    .hobby-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .hobby-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: transform .3s, border-color .3s;
+    }
+    .hobby-card:hover { transform: translateY(-4px) rotate(-1deg); border-color: rgba(162,89,255,0.4); }
+    .hobby-card .hicon { font-size: 1.3rem; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 5%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+      position: relative;
+      z-index: 1;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── Animations ── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      #about .about-grid,
+      #research .research-grid,
+      #skills .skills-outer,
+      #contact .contact-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 14px 4%; }
+      .nav-links { display: none; }
+      section { padding: 80px 4%; }
+      .hero-name { letter-spacing: -1px; }
+      .about-info-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .pub-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- Particles Canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="nav-logo">PT</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- ─── Hero ─── -->
+  <section id="hero">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      PhD Scholar · IIT Ropar
+    </div>
+    <h1 class="hero-name">
+      <span class="grad">Prathamesh</span><br>Nitin Tanksale
+    </h1>
+    <p class="hero-role">
+      Microarchitectural Security &amp; <span>High-Performance CPU Design</span>
+    </p>
+    <blockquote class="hero-quote">
+      "Only thing certain in life is uncertainty in life."
+    </blockquote>
+    <div class="hero-ctas">
+      <a href="#publications" class="btn btn-primary">
+        📄 View Publications
+      </a>
+      <a href="#contact" class="btn btn-ghost">
+        ✉ Get in Touch
+      </a>
+    </div>
+    <div class="hero-scroll">
+      Scroll
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── About ─── -->
+  <section id="about">
+    <div class="section-label">Who I am</div>
+    <h2 class="section-title">About <span class="highlight">Me</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I am a <strong>Ph.D. Scholar at IIT Ropar</strong>, specializing in microarchitectural security and high-performance CPU design. My research bridges CPU performance optimization with secure architecture design.
+        </p>
+        <p>
+          I have extensive experience developing and validating architectural simulators for performance and energy analysis, and I am proficient in C/C++ programming with strong expertise in system-level modeling and hardware–software co-design.
+        </p>
+        <p>
+          My work has been published in leading venues including <strong>IEEE HOST</strong> and <strong>DATE</strong>, addressing critical challenges at the intersection of memory systems, cache architectures, and hardware security.
+        </p>
+        <div class="about-info-grid" style="margin-top:28px;">
+          <div class="info-item">
+            <span class="label">Citizenship</span>
+            <span class="value">🇮🇳 India</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Languages</span>
+            <span class="value">English · Hindi · Marathi</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Location</span>
+            <span class="value">IIT Ropar, Punjab</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Status</span>
+            <span class="value" style="color:var(--accent3);">● Available for Collaboration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="stat-num" data-count="4">4</div>
+          <div class="stat-desc">Published Papers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">8.6</div>
+          <div class="stat-desc">M.Tech CGPA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">8.4</div>
+          <div class="stat-desc">PhD CGPA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-count="5">5+</div>
+          <div class="stat-desc">Years Research</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Research ─── -->
+  <section id="research">
+    <div class="section-label">What I study</div>
+    <h2 class="section-title">Research <span class="highlight">Interests</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="research-grid">
+      <div class="research-card security reveal">
+        <div class="research-icon">🔒</div>
+        <div class="research-title">Security-Oriented Research</div>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:18px;">
+          Focused on building resilient hardware architectures that withstand sophisticated microarchitectural attacks.
+        </p>
+        <div class="research-tags">
+          <span class="rtag">Microarchitectural Security</span>
+          <span class="rtag">Side-Channel Resilient Caches</span>
+          <span class="rtag">Secure Memory Hierarchies</span>
+          <span class="rtag">Hardware Defense Mechanisms</span>
+          <span class="rtag">Emerging Memory Technologies</span>
+        </div>
+      </div>
+
+      <div class="research-card performance reveal">
+        <div class="research-icon">⚡</div>
+        <div class="research-title">Performance-Oriented Research</div>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:18px;">
+          Designing cutting-edge CPU and memory architectures that maximize throughput while maintaining security guarantees.
+        </p>
+        <div class="research-tags">
+          <span class="rtag">High-Performance CPU Design</span>
+          <span class="rtag">Cache Optimization</span>
+          <span class="rtag">Non-Volatile Memories</span>
+          <span class="rtag">Scalable Architectures</span>
+          <span class="rtag">Performance–Security Co-Optimization</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Publications ─── -->
+  <section id="publications">
+    <div class="section-label">My work</div>
+    <h2 class="section-title">Research <span class="highlight">Publications</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="pub-list">
+
+      <div class="pub-card reveal">
+        <span class="pub-year">HOST 2025</span>
+        <div>
+          <div class="pub-title">RRR: Rethinking Randomized Remapping for High Performance Secured NVM LLC</div>
+          <div class="pub-authors">
+            <strong>Prathamesh Nitin Tanksale</strong>, Guru Raghava S. Seethiraju, Shirshendu Das, Venkata Kalyan Tavva
+          </div>
+          <span class="pub-venue">📋 IEEE HOST 2025, pp. 381–391</span>
+          <br>
+          <a href="https://doi.org/10.1109/HOST64725.2025.11050039" target="_blank" class="pub-link">
+            🔗 10.1109/HOST64725.2025.11050039 ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card reveal">
+        <span class="pub-year">DATE 2024</span>
+        <div>
+          <div class="pub-title">Flush + earlyRELOAD: Covert Channels Attack on Shared LLC Using MSHR Merging</div>
+          <div class="pub-authors">
+            Aditya S. Gangwar, <strong>Prathamesh Nitin Tanksale</strong>, Shirshendu Das, Sudeepta Mishra
+          </div>
+          <span class="pub-venue">📋 DATE 2024, pp. 1–6</span>
+          <br>
+          <a href="https://doi.org/10.23919/DATE58400.2024.10546609" target="_blank" class="pub-link">
+            🔗 10.23919/DATE58400.2024.10546609 ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card reveal">
+        <span class="pub-year">HiPC 2023</span>
+        <div>
+          <div class="pub-title">CAMOUFLAGE: An Efficient Mechanism to Hide Congestion in NVM LLC</div>
+          <div class="pub-authors">
+            <strong>Prathamesh Nitin Tanksale</strong>, Kousik Kumar Dutta, Shirshendu Das, Venkata Kalyan Tavva
+          </div>
+          <span class="pub-venue">📋 HiPC 2023 — Extended Abstract</span>
+        </div>
+      </div>
+
+      <div class="pub-card reveal">
+        <span class="pub-year">DATE 2021</span>
+        <div>
+          <div class="pub-title">A Fairness Conscious Cache Replacement Policy for Last Level Cache</div>
+          <div class="pub-authors">
+            Kousik Kumar Dutta, <strong>Prathamesh Nitin Tanksale</strong>, Shirshendu Das
+          </div>
+          <span class="pub-venue">📋 DATE 2021, pp. 695–700</span>
+          <br>
+          <a href="https://doi.org/10.23919/DATE51398.2021.9474096" target="_blank" class="pub-link">
+            🔗 10.23919/DATE51398.2021.9474096 ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Skills ─── -->
+  <section id="skills">
+    <div class="section-label">My toolkit</div>
+    <h2 class="section-title">Skills &amp; <span class="highlight">Tools</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="skills-outer">
+      <div class="reveal">
+        <div class="skill-group-title">Programming Languages</div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">C / C++</span>
+            <span class="skill-pct">95%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Python</span>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.80"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Shell Script</span>
+            <span class="skill-pct">75%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill green" data-width="0.75"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">LaTeX</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill green" data-width="0.85"></div></div>
+        </div>
+
+        <div style="margin-top:40px;">
+          <div class="skill-group-title">Architecture Simulators</div>
+          <div class="tool-chips">
+            <div class="chip">ChampSim</div>
+            <div class="chip">CACTI</div>
+            <div class="chip">Ramulator</div>
+            <div class="chip">NVSIM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="skill-group-title">Research & Domain Skills</div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Microarchitectural Security</span>
+            <span class="skill-pct">95%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Cache Architecture Design</span>
+            <span class="skill-pct">92%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="0.92"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">Hardware–Software Co-Design</span>
+            <span class="skill-pct">88%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill green" data-width="0.88"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-row">
+            <span class="skill-name">NVM System Modeling</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill green" data-width="0.85"></div></div>
+        </div>
+
+        <div style="margin-top:40px;">
+          <div class="skill-group-title">Productivity Tools</div>
+          <div class="tool-chips">
+            <div class="chip">VS Code</div>
+            <div class="chip">MS Word</div>
+            <div class="chip">Excel</div>
+            <div class="chip">PowerPoint</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Education ─── -->
+  <section id="education">
+    <div class="section-label">My journey</div>
+    <h2 class="section-title">Education &amp; <span class="highlight">Background</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="edu-card">
+          <div class="edu-degree">Ph.D. in Computer Science &amp; Engineering</div>
+          <div class="edu-inst">Indian Institute of Technology Ropar</div>
+          <div class="edu-meta">
+            <span class="edu-badge badge-year">2021 – Ongoing</span>
+            <span class="edu-badge badge-cgpa">CGPA: 8.4</span>
+          </div>
+          <div class="edu-details">
+            <p><strong>Thesis:</strong> Performance-Centric Redesign of Secure Cache Architectures</p>
+            <p><strong>Courses:</strong> Security Aware Architecture · Memory Systems and Architecture · Advanced Computer Architecture · Scheduling in Parallel and Distributed Systems</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="edu-card">
+          <div class="edu-degree">M.Tech. in Computer Science &amp; Engineering</div>
+          <div class="edu-inst">Indian Institute of Technology Ropar</div>
+          <div class="edu-meta">
+            <span class="edu-badge badge-year">2019 – 2021</span>
+            <span class="edu-badge badge-cgpa">CGPA: 8.6</span>
+          </div>
+          <div class="edu-details">
+            <p><strong>Thesis:</strong> An Efficient Mechanism to Hide Congestion in NVM LLC</p>
+            <p><strong>Courses:</strong> Data Structures and Algorithm · Computer Systems · Advanced Operating Systems</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Teaching ─── -->
+  <section id="teaching">
+    <div class="section-label">Giving back</div>
+    <h2 class="section-title">Teaching <span class="highlight">Assistance</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="teach-grid reveal">
+      <div class="teach-chip"><span class="tc-icon">🔒</span> Security Aware Architecture</div>
+      <div class="teach-chip"><span class="tc-icon">💾</span> Memory System and Architecture</div>
+      <div class="teach-chip"><span class="tc-icon">🖥️</span> Computer Systems</div>
+      <div class="teach-chip"><span class="tc-icon">⚙️</span> Digital Logic Design</div>
+      <div class="teach-chip"><span class="tc-icon">🏗️</span> Computer Architecture</div>
+      <div class="teach-chip"><span class="tc-icon">📊</span> Data Structures and Algorithms</div>
+    </div>
+
+    <!-- Hobbies -->
+    <div style="margin-top:64px;">
+      <div class="section-label">Beyond Academia</div>
+      <h2 class="section-title" style="font-size:clamp(1.5rem,2.5vw,2rem);">Interests &amp; <span class="highlight">Hobbies</span></h2>
+      <div class="hobby-grid reveal">
+        <div class="hobby-card"><span class="hicon">📖</span> Bhagavad Gita</div>
+        <div class="hobby-card"><span class="hicon">🕉️</span> Śrīmad Bhāgavatam</div>
+        <div class="hobby-card"><span class="hicon">♟️</span> Chess</div>
+        <div class="hobby-card"><span class="hicon">🎤</span> Debating &amp; Anchoring</div>
+        <div class="hobby-card"><span class="hicon">🍳</span> Cooking</div>
+        <div class="hobby-card"><span class="hicon">🌍</span> Exploring New Cuisines</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact ─── -->
+  <section id="contact">
+    <div class="section-label">Let's connect</div>
+    <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
+    <div class="section-divider"></div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon ci-email">✉️</div>
+        <div class="contact-info">
+          <div class="ci-label">Email</div>
+          <div class="ci-value">prathamesh.csz0003@iitrpr.ac.in</div>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon ci-phone">📞</div>
+        <div class="contact-info">
+          <div class="ci-label">Phone</div>
+          <div class="ci-value">+91 9767451761</div>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon ci-loc">📍</div>
+        <div class="contact-info">
+          <div class="ci-label">Address</div>
+          <div class="ci-value">BW-310, Beas Hostel, IIT Ropar<br>Rupnagar – 140001, Punjab, India</div>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon ci-lang">🌐</div>
+        <div class="contact-info">
+          <div class="ci-label">Languages</div>
+          <div class="ci-value">English · Hindi · Marathi (native)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Crafted with ❤️ by <span>Prathamesh Nitin Tanksale</span> · Ph.D. Scholar, IIT Ropar · © 2025</p>
+</footer>
+
+<script>
+/* ── Particle Canvas ── */
+(function () {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const COLORS = ['#4f8ef7', '#a259ff', '#00e5c3'];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.8 + 0.4,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha: Math.random() * 0.5 + 0.15,
+    };
+  }
+
+  function initParticles() {
+    const count = Math.floor((canvas.width * canvas.height) / 10000);
+    particles = Array.from({ length: Math.min(count, 160) }, createParticle);
+  }
+  initParticles();
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(79,142,247,${0.12 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawLines();
+    particles.forEach(p => {
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ── Navbar scroll shrink ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ── Reveal on scroll ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── Skill bar animations ── */
+const skillFills = document.querySelectorAll('.skill-fill');
+const skillObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const w = parseFloat(el.dataset.width);
+      el.style.width = (w * 100) + '%';
+      el.classList.add('animate');
+      skillObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+skillFills.forEach(el => {
+  el.style.width = '0%';
+  skillObs.observe(el);
+});
+
+/* ── Floating tilt on glass cards ── */
+document.querySelectorAll('.glass-card, .pub-card, .edu-card, .research-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width  / 2;
+    const cy = rect.top  + rect.height / 2;
+    const rx = ((e.clientY - cy) / (rect.height / 2)) * 5;
+    const ry = ((e.clientX - cx) / (rect.width  / 2)) * -5;
+    card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* ── Smooth active nav highlight ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 200) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+  });
+});
+</script>
+</body>
+</html>

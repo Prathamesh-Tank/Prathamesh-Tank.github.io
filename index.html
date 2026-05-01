@@ -709,6 +709,83 @@
     .hobby-card:hover { transform: translateY(-4px) rotate(-1deg); border-color: rgba(197,154,107,0.24); }
     .hobby-card .hicon { font-size: 1.3rem; }
 
+    /* ── Travel & Presentations Gallery ── */
+    #gallery .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      aspect-ratio: 1;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .3s, filter .3s;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08) rotate(0.5deg);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(139,94,60,0.85) 0%, rgba(197,154,107,0.75) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s ease;
+      padding: 24px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .gallery-overlay-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.5;
+    }
+
+    .gallery-year {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(79,79,79,0.8);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      z-index: 5;
+      backdrop-filter: blur(4px);
+    }
+
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -748,6 +825,7 @@
       #skills .skills-outer,
       #contact .contact-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
+      #gallery .gallery-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       nav { padding: 14px 4%; }
@@ -757,6 +835,7 @@
       .about-info-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr; }
       .pub-card { grid-template-columns: 1fr; }
+      #gallery .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -779,6 +858,7 @@
     <li><a href="#publications">Publications</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#gallery">Travel</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -1147,6 +1227,47 @@
         <div class="hobby-card"><span class="hicon">🎤</span> Debating &amp; Anchoring</div>
         <div class="hobby-card"><span class="hicon">🍳</span> Cooking</div>
         <div class="hobby-card"><span class="hicon">🌍</span> Exploring New Cuisines</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Travel & Presentations ─── -->
+  <section id="gallery">
+    <div class="section-label">Adventures in Academia</div>
+    <h2 class="section-title">Travel &amp; <span class="highlight">Presentations</span></h2>
+    <div class="section-divider"></div>
+
+    <p style="color: var(--muted); font-size: 1.05rem; margin-bottom: 48px; max-width: 700px;">
+      Presenting my research work <strong>RRR: Rethinking Randomized Remapping for High Performance Secured NVM LLC</strong> 
+      at <strong>IEEE HOST 2025</strong> in the United States. A memorable journey combining cutting-edge research breakthroughs with cultural exploration.
+    </p>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-card">
+        <img src="1.jpg" alt="Presenting RRR research at IEEE HOST 2025">
+        <div class="gallery-year">2025</div>
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-title">🎤 Presenting RRR</div>
+          <div class="gallery-overlay-desc">Sharing research insights on NVM LLC security at IEEE HOST 2025</div>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="2.jpg" alt="Conference venue and networking">
+        <div class="gallery-year">2025</div>
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-title">🤝 Networking</div>
+          <div class="gallery-overlay-desc">Engaging with leading researchers and industry experts in microarchitecture</div>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="3.jpg" alt="USA travel experience">
+        <div class="gallery-year">2025</div>
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-title">✈️ Cultural Experience</div>
+          <div class="gallery-overlay-desc">Exploring the vibrant culture and landscapes during academic travels</div>
+        </div>
       </div>
     </div>
   </section>
